@@ -4,6 +4,8 @@ services:
       context: .
     ports:
        - "3010:3010"
+    env_file:
+      - .env
     depends_on:
       - mongo
     networks:
