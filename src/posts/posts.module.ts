@@ -5,6 +5,8 @@ import { PostsMongooseRepository } from './repositories/mongoose/posts.mongoose.
 import { PostsService } from './services/posts.service';
 import { PostsController } from './controllers/posts.controller';
 import { Posts, PostsSchema } from './schemas/posts.schema';
+import { PostsProvider } from './provider/posts.provider';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
@@ -14,6 +16,7 @@ import { Posts, PostsSchema } from './schemas/posts.schema';
         schema: PostsSchema,
       },
     ]),
+    UsersModule,
   ],
   providers: [
     {
@@ -21,6 +24,7 @@ import { Posts, PostsSchema } from './schemas/posts.schema';
       useClass: PostsMongooseRepository,
     },
     PostsService,
+    PostsProvider,
   ],
   controllers: [PostsController],
 })

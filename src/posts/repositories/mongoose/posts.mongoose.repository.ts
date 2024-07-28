@@ -20,4 +20,22 @@ export class PostsMongooseRepository extends PostsRepository {
     const createdPost = new this.postsModel(createPostDto);
     return createdPost.save();
   }
+
+  async getPostById(id: string): Promise<IPosts> {
+    const post = this.postsModel.findById(id);
+    return post;
+  }
+
+  async deletePostById(id: string): Promise<IPosts> {
+    const post = this.postsModel.findByIdAndDelete(id).exec();
+    return post;
+  }
+
+  async updatePostById(
+    createPostDtop: IPosts & { id: string },
+  ): Promise<IPosts> {
+    const { id, ...post } = createPostDtop;
+    const updatedPost = this.postsModel.findByIdAndUpdate(id, post).exec();
+    return updatedPost;
+  }
 }
