@@ -63,5 +63,5 @@ npm run start
 
 Após iniciar a aplicação, você pode acessar a documentação da API via Swagger no seguinte URL:
 
-[text](http://localhost:3000/api)
+[Swagger Doc](http://localhost:3000/api)
 
