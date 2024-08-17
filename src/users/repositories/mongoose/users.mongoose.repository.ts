@@ -1,8 +1,8 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { UsersRepository } from '../users.repository';
 import { Model } from 'mongoose';
-import { Users } from 'src/users/schemas/users.schema';
-import { IUsers } from 'src/users/schemas/models/users.interface';
+import { Users } from '../../schemas/users.schema';
+import { IUsers } from '../../schemas/models/users.interface';
 
 export class UsersMongooseRepository extends UsersRepository {
   constructor(

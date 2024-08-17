@@ -1,8 +1,8 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { PostsRepository } from '../posts.repository';
 import { Model } from 'mongoose';
-import { Posts } from 'src/posts/schemas/posts.schema';
-import { IPosts } from 'src/posts/schemas/models/posts.interface';
+import { Posts } from '../../schemas/posts.schema';
+import { IPosts } from '../../schemas/models/posts.interface';
 
 export class PostsMongooseRepository extends PostsRepository {
   constructor(
