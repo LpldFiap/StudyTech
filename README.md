@@ -1,73 +1,61 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Aplicação Backend de API para criação e manipulação de Posts, com Next.js, Node.js e MongoDB
+## Desenvolvido para o Tech Challenge de Pós Graduação Fullstack na FIAP
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Grupo
+### - Danilo Soares da Silva - RM:354317
+### - Gabriel Antunes – RM: 354712
+### - Lucas dos Santos Melo – RM:355274
+### - Lucas Souza Davanso – RM: 354925
+### - Paloma Cristina da Silva Correa – RM:355519
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Sobre o Projeto
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Esta é uma aplicação backend construída utilizando Next.js e Node.js, com um banco de dados NoSQL MongoDB. A aplicação é containerizada utilizando Docker e inclui testes automatizados com Jest.
 
-## Installation
+## Índice
+
+- [Instalação](#instalação)
+- [Configuração do Docker](#configuração-do-docker)
+- [Executando a Aplicação](#executando-a-aplicação)
+- [Executando os Testes](#executando-os-testes)
+- [Documentação da API](#documentação-da-api)
+
+## Instalação
+
+Primeiro, instale as dependências necessárias:
 
 ```bash
-$ yarn install
+npm install
 ```
 
-## Running the app
+## Configuração do Docker
+
+Para construir a imagem Docker da aplicação, utilize o seguinte comando:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+docker build -t studytech:latest --build-arg="MONGO_URI=mongodb+srv://grupotechlpld:{{password}}@techchallengecluster.ebtg6gj.mongodb.net/" .
 ```
+Substitua {{password}} pela senha real do seu cluster MongoDB.
 
-## Test
+## Executando os testes
+
+Para rodar os testes, utilize o seguinte comando:
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+npm run test
 ```
 
-## Support
+## Executando a Aplicação
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Para iniciar a aplicação, execute o seguinte comando:
 
-## Stay in touch
+```bash
+npm run start
+```
+## Documentação da API
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Após iniciar a aplicação, você pode acessar a documentação da API via Swagger no seguinte URL:
 
-## License
+[text](http://localhost:3000/api)
 
-Nest is [MIT licensed](LICENSE).
