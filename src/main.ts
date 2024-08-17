@@ -13,7 +13,6 @@ async function bootstrap() {
     .setDescription('Study-tech API for FIAP tech challenger')
     .setVersion('1.0')
     .addTag('posts')
-    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

@@ -12,6 +12,8 @@ import { PostsService } from '../services/posts.service';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { PostsProvider } from '../provider/posts.provider';
 import { IPosts } from '../schemas/models/posts.interface';
+import { ApiBody } from '@nestjs/swagger';
+import { DeletePostDto } from '../dto/DeletePostDto';
 
 @Controller('posts')
 export class PostsController {
@@ -58,6 +60,7 @@ export class PostsController {
 
   //criando a rota para a criação de novas postagens
   @Post()
+  @ApiBody({ type: CreatePostDto })
   async createPost(@Body() createPostDto: CreatePostDto & { user_id: string }) {
     const role = await this.postsProvider.checkUserRole(createPostDto.user_id);
     if (role && role === 'teacher') {
@@ -72,6 +75,7 @@ export class PostsController {
   }
 
   @Put('/:id')
+  @ApiBody({ type: CreatePostDto })
   async updatePost(
     @Param('id') id: string,
     @Body() updatePostDto: CreatePostDto & { user_id: string },
@@ -84,6 +88,7 @@ export class PostsController {
   }
 
   @Delete('/:id')
+  @ApiBody({ type: DeletePostDto })
   async deletePostById(
     @Param('id') id: string,
     @Body() { user_id }: { user_id: string },
