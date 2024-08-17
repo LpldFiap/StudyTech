@@ -17,9 +17,10 @@ Esta é uma aplicação backend construída utilizando Next.js e Node.js, com um
 
 - [Instalação](#instalação)
 - [Configuração do Docker](#configuração-do-docker)
-- [Executando a Aplicação](#executando-a-aplicação)
 - [Executando os Testes](#executando-os-testes)
+- [Executando a Aplicação](#executando-a-aplicação)
 - [Documentação da API](#documentação-da-api)
+
 
 ## Instalação
 
@@ -28,6 +29,7 @@ Primeiro, instale as dependências necessárias:
 ```bash
 npm install
 ```
+
 
 ## Configuração do Docker
 
@@ -38,6 +40,7 @@ docker build -t studytech:latest --build-arg="MONGO_URI=mongodb+srv://grupotechl
 ```
 Substitua {{password}} pela senha real do seu cluster MongoDB.
 
+
 ## Executando os testes
 
 Para rodar os testes, utilize o seguinte comando:
@@ -46,6 +49,7 @@ Para rodar os testes, utilize o seguinte comando:
 npm run test
 ```
 
+
 ## Executando a Aplicação
 
 Para iniciar a aplicação, execute o seguinte comando:
@@ -53,6 +57,8 @@ Para iniciar a aplicação, execute o seguinte comando:
 ```bash
 npm run start
 ```
+
+
 ## Documentação da API
 
 Após iniciar a aplicação, você pode acessar a documentação da API via Swagger no seguinte URL:
