@@ -22,6 +22,8 @@ describe('PostsController', () => {
             createPost: jest.fn(),
             updatePostById: jest.fn(),
             deletePostById: jest.fn(),
+            search: jest.fn(),
+            getPostsAdmin: jest.fn(),
           },
         },
         {
@@ -49,6 +51,33 @@ describe('PostsController', () => {
 
       expect(await controller.getAllPosts(10, 1)).toBe(result);
     });
+  });
+
+  describe('getPostsBySearch', () => {
+    it('should return an array of posts', async () => {
+      const query = 'Test';
+      const result: IPosts[] = [{ title: 'Test Post', description: 'Test Description', author: 'Test Author', created_at: new Date() }];
+      jest.spyOn(postsService, 'search').mockResolvedValue(result);
+
+      expect(await controller.getPostsBySearch(query)).toBe(result);
+    });
+  });
+
+  describe('getPostsAdmin', () => {
+    it('should return an array of posts', async () => {
+      const result: IPosts[] = [{ id: 'some-id', title: 'Test Post', description: 'Test Description', author: 'Test Author', created_at: new Date() }];
+      jest.spyOn(postsProvider, 'checkUserRole').mockResolvedValue('teacher');
+      jest.spyOn(postsService, 'getPostsAdmin').mockResolvedValue(result);
+      expect(await controller.getPostsAdmin('some-id')).toEqual(result);
+    });
+
+    it('should return "Você não tem permissão para criar postagens." if user does not have permission', async () => {
+      jest.spyOn(postsProvider, 'checkUserRole').mockResolvedValue('student');
+    
+      const result = 'Você não tem permissão para acessar postagens.';
+    
+      expect(await controller.getPostsAdmin('some-id')).toBe(result);
+    } );
   });
 
   describe('getOnePost', () => {

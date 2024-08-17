@@ -17,8 +17,10 @@ describe('PostsService', () => {
           useValue: {
             getAllPosts: jest.fn(),
             getPostById: jest.fn(),
+            getPostsAdmin: jest.fn(),
             createPost: jest.fn(),
             deletePostById: jest.fn(),
+            search: jest.fn(),
           },
         },
       ],
@@ -38,6 +40,25 @@ describe('PostsService', () => {
       jest.spyOn(repository, 'getAllPosts').mockResolvedValue(result);
 
       expect(await service.getAllPosts(10, 1)).toBe(result);
+    });
+  });
+
+  describe('search', () => {
+    it('should return an array of posts', async () => {
+      const query = 'Test';
+      const result: IPosts[] = [{ title: 'Test Post', description: 'Test Description', author: 'Test Author', created_at: new Date() }];
+      jest.spyOn(repository, 'search').mockResolvedValue(result);
+
+      expect(await service.search(query)).toEqual(result);    
+    });
+  });
+
+  describe('getPostsAdmin', () => {
+    it('should return an array of posts', async () => {
+      const result: IPosts[] = [{ id: 'some-id', title: 'Test Post', description: 'Test Description', author: 'Test Author', created_at: new Date() }];
+      jest.spyOn(repository, 'getPostsAdmin').mockResolvedValue(result);
+
+      expect(await service.getPostsAdmin()).toEqual(result);    
     });
   });
 
