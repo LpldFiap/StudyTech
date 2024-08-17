@@ -11,6 +11,7 @@ import {
 import { PostsService } from '../services/posts.service';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { PostsProvider } from '../provider/posts.provider';
+import { IPosts } from '../schemas/models/posts.interface';
 
 @Controller('posts')
 export class PostsController {
@@ -26,11 +27,35 @@ export class PostsController {
   ) {
     return this.postsService.getAllPosts(limit, page);
   }
+
+  @Get('admin')
+  async getPostsAdmin(@Query('user_id') user_id: string): Promise<IPosts[] | string> {
+
+    const role = await this.postsProvider.checkUserRole(user_id);
+
+    if (!role) {
+
+      return 'Usuário não encontrado.';
+    }
+
+    if (role.trim().toLowerCase() === 'teacher') {
+      return this.postsService.getPostsAdmin();
+    }
+
+    return 'Você não tem permissão para acessar postagens.'; 
+  }
+
+  @Get('search')
+  async getPostsBySearch(@Query('query') query: string): Promise<IPosts[]> {
+    return this.postsService.search(query);
+  }
+
   @Get('/:id')
   async getOnePost(@Param('id') id: string) {
     const post = await this.postsService.getPostById(id);
     return post || 'Post não encontrado.';
   }
+
   //criando a rota para a criação de novas postagens
   @Post()
   async createPost(@Body() createPostDto: CreatePostDto & { user_id: string }) {

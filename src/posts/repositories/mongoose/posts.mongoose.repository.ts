@@ -6,7 +6,7 @@ import { IPosts } from '../../schemas/models/posts.interface';
 
 export class PostsMongooseRepository extends PostsRepository {
   constructor(
-    @InjectModel(Posts.name) private readonly postsModel: Model<Posts>,
+    @InjectModel(Posts.name) private readonly postsModel: Model<IPosts>,
   ) {
     super();
   }
@@ -16,26 +16,36 @@ export class PostsMongooseRepository extends PostsRepository {
     return this.postsModel.find().skip(offset).limit(limit).exec();
   }
 
+  async getPostsAdmin(): Promise<IPosts[]> {
+    return this.postsModel.find().exec();
+  }
+
   async createPost(createPostDto: IPosts): Promise<IPosts> {
     const createdPost = new this.postsModel(createPostDto);
     return createdPost.save();
   }
 
   async getPostById(id: string): Promise<IPosts> {
-    const post = this.postsModel.findById(id);
-    return post;
+    return this.postsModel.findById(id).exec();
+  }
+
+  async search(query: string): Promise<IPosts[]> {
+    return this.postsModel.find({
+      $or: [
+        { title: { $regex: query, $options: 'i' } },
+        { description: { $regex: query, $options: 'i' } }
+      ]
+    }).exec();
   }
 
   async deletePostById(id: string): Promise<IPosts> {
-    const post = this.postsModel.findByIdAndDelete(id).exec();
-    return post;
+    return this.postsModel.findByIdAndDelete(id).exec();
   }
 
   async updatePostById(
     createPostDtop: IPosts & { id: string },
   ): Promise<IPosts> {
     const { id, ...post } = createPostDtop;
-    const updatedPost = this.postsModel.findByIdAndUpdate(id, post).exec();
-    return updatedPost;
+    return this.postsModel.findByIdAndUpdate(id, post, { new: true }).exec();
   }
 }

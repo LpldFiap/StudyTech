@@ -11,8 +11,17 @@ export class PostsService {
   async getAllPosts(limit: number, page: number): Promise<IPosts[]> {
     return this.postsRepository.getAllPosts(limit, page);
   }
+
+  async getPostsAdmin(): Promise<IPosts[]> {
+    return this.postsRepository.getPostsAdmin();
+  }
+
   async getPostById(id: string): Promise<IPosts> {
     return this.postsRepository.getPostById(id);
+  }
+
+  async search(query: string): Promise<IPosts[]> {
+    return this.postsRepository.search(query);
   }
 
   async createPost(createPostDto: CreatePostDto): Promise<IPosts> {
