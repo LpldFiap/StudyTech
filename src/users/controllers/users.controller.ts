@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
@@ -47,11 +48,24 @@ export class UsersController {
   }
 
   @Delete('/:id')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        user_id: {
+          type: 'string',
+          description:
+            'ID do usuário que está realizando a ação de deletar o post',
+        },
+      },
+      required: ['user_id'],
+    },
+  })
   async deleteUserById(
     @Param('id') id: string,
-    @Body() { adminId }: { adminId: string },
+    @Body() { user_id }: { user_id: string },
   ) {
-    const admin = await this.usersService.getUserById(adminId);
+    const admin = await this.usersService.getUserById(user_id);
     if (admin && admin.role === 'teacher') {
       const deletedUser = await this.usersService.deleteUserById(id);
       return deletedUser
