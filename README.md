@@ -65,3 +65,8 @@ Após iniciar a aplicação, você pode acessar a documentação da API via Swag
 
 [Swagger Doc](http://localhost:3000/api)
 
+## Documentação projeto na raiz desse repositório >> Documentação TechChallenge2_v1.1.pdf <<
+
+## Vídeo apresentação swagger e código fonte na raiz desse repositório >> video_apresentacao_codigo.mp4 << e 
+## >> video_apresentacao_swagger <<
+
