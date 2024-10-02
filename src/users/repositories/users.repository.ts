@@ -8,4 +8,5 @@ export abstract class UsersRepository {
     updateUserDto: IUsers & { id: string },
   ): Promise<IUsers>;
   abstract deleteUserById(id: string): Promise<IUsers>;
+  abstract findUserByEmail(email: string): Promise<IUsers | null>; // Assegure-se de que isso está presente
 }

@@ -22,6 +22,6 @@ async function bootstrap() {
   // abaixo acessar a rota http://localhost:3010/docs
   setupRedoc(app);
 
-  await app.listen(3000);
+  await app.listen(3010);
 }
 bootstrap();

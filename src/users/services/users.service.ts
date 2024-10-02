@@ -37,4 +37,11 @@ export class UsersService {
   async deleteUserById(id: string): Promise<IUsers> {
     return this.usersRepository.deleteUserById(id);
   }
+  async validateUser(email: string, password: string): Promise<IUsers | null> {
+    const user = await this.usersRepository.findUserByEmail(email);
+    if (user && user.password === password) {
+      return user;
+    }
+    return null;
+  }
 }

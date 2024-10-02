@@ -22,7 +22,7 @@ export class UsersMongooseRepository extends UsersRepository {
   }
 
   async getUserById(id: string): Promise<IUsers> {
-    const user = this.usersModel.findById(id);
+    const user = this.usersModel.findById(id).exec();
     return user;
   }
 
@@ -37,5 +37,9 @@ export class UsersMongooseRepository extends UsersRepository {
     const { id, ...user } = createUserDto;
     const updatedUser = this.usersModel.findByIdAndUpdate(id, user).exec();
     return updatedUser;
+  }
+  // Buscar usuário pelo email
+  async findUserByEmail(email: string): Promise<IUsers | null> {
+    return this.usersModel.findOne({ email }).exec();
   }
 }

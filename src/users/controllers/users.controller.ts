@@ -7,10 +7,12 @@ import {
   Param,
   Delete,
   Put,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiResponse } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
@@ -73,5 +75,32 @@ export class UsersController {
         : 'Usuário não encontrado.';
     }
     return 'Você não tem permissão para deletar usuários.';
+  }
+
+  // ... outros métodos
+
+  @Post('login')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        email: { type: 'string' },
+        password: { type: 'string' },
+      },
+      required: ['email', 'password'],
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Login successful.' })
+  @ApiResponse({ status: 401, description: 'Invalid credentials.' })
+  async login(@Body() body: { email: string; password: string }) {
+    const user = await this.usersService.validateUser(
+      body.email,
+      body.password,
+    );
+    if (user) {
+      return { message: 'Login successful.', user };
+    } else {
+      throw new HttpException('Invalid credentials.', HttpStatus.UNAUTHORIZED);
+    }
   }
 }

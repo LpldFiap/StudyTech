@@ -44,7 +44,7 @@ export class PostsController {
       return this.postsService.getPostsAdmin();
     }
 
-    return 'Você não tem permissão para acessar postagens.'; 
+    return 'Você não tem permissão para acessar postagens.';
   }
 
   @Get('search')
