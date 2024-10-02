@@ -8,6 +8,7 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({ origin: '*' });
   const config = new DocumentBuilder()
     .setTitle('study-tech')
     .setDescription('Study-tech API for FIAP tech challenger')
